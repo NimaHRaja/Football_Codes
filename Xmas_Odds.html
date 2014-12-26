@@ -70,6 +70,8 @@ img {
 <p>Reading Data from <a href="http://www.betfair.com/exchange/football/competition?id=31" class="uri">http://www.betfair.com/exchange/football/competition?id=31</a></p>
 <pre class="r"><code>library(XML);
 library(xtable);
+library(knitr);
+
 matches_URL &lt;- &quot;http://www.betfair.com/exchange/football/competition?id=31&quot;
 
 # For some reason, Betfair has changed its design recently. 
@@ -106,7 +108,232 @@ A &lt;- round((100/all_matches[,7]+ 100/all_matches[,8])/rowSums(1/all_matches[,
 
 output &lt;- data.frame(cbind(&quot;Home&quot; = all_matches[,1], H, D, A, &quot;Away&quot; = all_matches[,2]))
 
-print(xtable(output), comment=F)</code></pre>
+
+kable(output, format = &quot;markdown&quot;) # MD &amp; HTML Output</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Home</th>
+<th align="left">H</th>
+<th align="left">D</th>
+<th align="left">A</th>
+<th align="left">Away</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Chelsea</td>
+<td align="left">75</td>
+<td align="left">18</td>
+<td align="left">7</td>
+<td align="left">West Ham</td>
+</tr>
+<tr class="even">
+<td align="left">Burnley</td>
+<td align="left">18</td>
+<td align="left">25</td>
+<td align="left">57</td>
+<td align="left">Liverpool</td>
+</tr>
+<tr class="odd">
+<td align="left">C Palace</td>
+<td align="left">25</td>
+<td align="left">29</td>
+<td align="left">46</td>
+<td align="left">Southampton</td>
+</tr>
+<tr class="even">
+<td align="left">Everton</td>
+<td align="left">53</td>
+<td align="left">27</td>
+<td align="left">20</td>
+<td align="left">Stoke</td>
+</tr>
+<tr class="odd">
+<td align="left">Leicester</td>
+<td align="left">28</td>
+<td align="left">28</td>
+<td align="left">44</td>
+<td align="left">Tottenham</td>
+</tr>
+<tr class="even">
+<td align="left">Man Utd</td>
+<td align="left">71</td>
+<td align="left">19</td>
+<td align="left">10</td>
+<td align="left">Newcastle</td>
+</tr>
+<tr class="odd">
+<td align="left">Sunderland</td>
+<td align="left">48</td>
+<td align="left">30</td>
+<td align="left">22</td>
+<td align="left">Hull</td>
+</tr>
+<tr class="even">
+<td align="left">Swansea</td>
+<td align="left">58</td>
+<td align="left">26</td>
+<td align="left">16</td>
+<td align="left">Aston Villa</td>
+</tr>
+<tr class="odd">
+<td align="left">West Brom</td>
+<td align="left">16</td>
+<td align="left">23</td>
+<td align="left">61</td>
+<td align="left">Man City</td>
+</tr>
+<tr class="even">
+<td align="left">Arsenal</td>
+<td align="left">77</td>
+<td align="left">16</td>
+<td align="left">7</td>
+<td align="left">QPR</td>
+</tr>
+<tr class="odd">
+<td align="left">Tottenham</td>
+<td align="left">29</td>
+<td align="left">28</td>
+<td align="left">43</td>
+<td align="left">Man Utd</td>
+</tr>
+<tr class="even">
+<td align="left">Southampton</td>
+<td align="left">20</td>
+<td align="left">26</td>
+<td align="left">54</td>
+<td align="left">Chelsea</td>
+</tr>
+<tr class="odd">
+<td align="left">Aston Villa</td>
+<td align="left">41</td>
+<td align="left">29</td>
+<td align="left">29</td>
+<td align="left">Sunderland</td>
+</tr>
+<tr class="even">
+<td align="left">Hull</td>
+<td align="left">43</td>
+<td align="left">29</td>
+<td align="left">28</td>
+<td align="left">Leicester</td>
+</tr>
+<tr class="odd">
+<td align="left">Man City</td>
+<td align="left">83</td>
+<td align="left">12</td>
+<td align="left">5</td>
+<td align="left">Burnley</td>
+</tr>
+<tr class="even">
+<td align="left">QPR</td>
+<td align="left">41</td>
+<td align="left">28</td>
+<td align="left">31</td>
+<td align="left">C Palace</td>
+</tr>
+<tr class="odd">
+<td align="left">Stoke</td>
+<td align="left">50</td>
+<td align="left">28</td>
+<td align="left">22</td>
+<td align="left">West Brom</td>
+</tr>
+<tr class="even">
+<td align="left">West Ham</td>
+<td align="left">27</td>
+<td align="left">27</td>
+<td align="left">47</td>
+<td align="left">Arsenal</td>
+</tr>
+<tr class="odd">
+<td align="left">Newcastle</td>
+<td align="left">34</td>
+<td align="left">29</td>
+<td align="left">37</td>
+<td align="left">Everton</td>
+</tr>
+<tr class="even">
+<td align="left">Liverpool</td>
+<td align="left">58</td>
+<td align="left">24</td>
+<td align="left">17</td>
+<td align="left">Swansea</td>
+</tr>
+<tr class="odd">
+<td align="left">Stoke</td>
+<td align="left">23</td>
+<td align="left">24</td>
+<td align="left">53</td>
+<td align="left">Man Utd</td>
+</tr>
+<tr class="even">
+<td align="left">Aston Villa</td>
+<td align="left">44</td>
+<td align="left">27</td>
+<td align="left">29</td>
+<td align="left">C Palace</td>
+</tr>
+<tr class="odd">
+<td align="left">Hull</td>
+<td align="left">27</td>
+<td align="left">29</td>
+<td align="left">44</td>
+<td align="left">Everton</td>
+</tr>
+<tr class="even">
+<td align="left">Liverpool</td>
+<td align="left">70</td>
+<td align="left">18</td>
+<td align="left">13</td>
+<td align="left">Leicester</td>
+</tr>
+<tr class="odd">
+<td align="left">Man City</td>
+<td align="left">77</td>
+<td align="left">14</td>
+<td align="left">9</td>
+<td align="left">Sunderland</td>
+</tr>
+<tr class="even">
+<td align="left">Newcastle</td>
+<td align="left">58</td>
+<td align="left">23</td>
+<td align="left">19</td>
+<td align="left">Burnley</td>
+</tr>
+<tr class="odd">
+<td align="left">QPR</td>
+<td align="left">34</td>
+<td align="left">29</td>
+<td align="left">37</td>
+<td align="left">Swansea</td>
+</tr>
+<tr class="even">
+<td align="left">Southampton</td>
+<td align="left">34</td>
+<td align="left">26</td>
+<td align="left">39</td>
+<td align="left">Arsenal</td>
+</tr>
+<tr class="odd">
+<td align="left">West Ham</td>
+<td align="left">55</td>
+<td align="left">25</td>
+<td align="left">20</td>
+<td align="left">West Brom</td>
+</tr>
+<tr class="even">
+<td align="left">Tottenham</td>
+<td align="left">26</td>
+<td align="left">28</td>
+<td align="left">46</td>
+<td align="left">Chelsea</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># print(xtable(output), comment=F) # PDF Output</code></pre>
 
 
 </div>
