@@ -1,0 +1,63 @@
+---
+title: "Next 30 Matches (Implied) Probabilities"
+author: "NHR"
+date: "Friday, December 26, 2014"
+output:
+  pdf_document: default
+  html_document:
+    keep_md: yes
+---
+
+Reading Data from <http://www.betfair.com/exchange/football/competition?id=31>
+
+```{r get_data, results = 'hide', warning = FALSE}
+library(XML);
+library(xtable);
+matches_URL <- "http://www.betfair.com/exchange/football/competition?id=31"
+
+# For some reason, Betfair has changed its design recently. 
+# It's not a table anymore
+# matches_Table <- readHTMLTable(matches_URL)
+
+# ReadLine and Parse the HTML page.
+matches_html  <- readLines(matches_URL)
+matches_parse <- htmlTreeParse(matches_html,useInternal=TRUE)
+```
+
+Cleaning Data:
+
+```{r clean_data, results = 'hide'}
+# Extract the relevant bits.
+data_odds <- xpathSApply(matches_parse, "//span[@class = 'price']", xmlValue)   
+
+data_home <- xpathSApply(matches_parse, "//span[@class = 'home-team']", xmlValue)   
+
+data_away <- xpathSApply(matches_parse, "//span[@class = 'away-team']", xmlValue)   
+
+# Otherwise team names would be interpreted as factors.
+options(stringsAsFactors = FALSE)
+
+# Clean odds and make them numeric
+data_odds <- data.frame(matrix(data_odds[1:180], ncol = 6, byrow = TRUE))
+data_odds <- data.frame(apply(data_odds, 2, as.numeric))
+
+# Matches data.frame
+all_matches <- cbind("Home" = data_home, data_away, data_odds)
+colnames(all_matches) <- c("Home", "Away", "H_B", "H_L", "D_B", "D_L", "A_B", "A_L")
+```
+
+
+Creating probabilities data.frame with a rough normalisation method. The results are reported with 0 decimal points.
+
+```{r output, results='asis'}
+# Output data.frame
+
+H <- round((100/all_matches[,3]+ 100/all_matches[,4])/rowSums(1/all_matches[,3:8]), digits = 0)
+D <- round((100/all_matches[,5]+ 100/all_matches[,6])/rowSums(1/all_matches[,3:8]), digits = 0)
+A <- round((100/all_matches[,7]+ 100/all_matches[,8])/rowSums(1/all_matches[,3:8]), digits = 0)
+
+output <- data.frame(cbind("Home" = all_matches[,1], H, D, A, "Away" = all_matches[,2]))
+
+print(xtable(output), comment=F)
+```
+
