@@ -1,8 +1,4 @@
-Football_Codes
+PL_Weeks18-20
 =============
-My football codes. Each folder has a seperate READ.ME
 
-Folders:
---------
-
-- PL_Betfair_ComingFixtures_Odds: Gets coming fixtures odds from Betfair.
+Download weeks 18-20 matches' odds from betfair and reports them as implied probabilities.
