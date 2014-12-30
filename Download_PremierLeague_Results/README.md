@@ -1,18 +1,27 @@
 Files
 ==================
 
-PL_results.R
+/Codes/PL_results.R
 ------------------
-Extracts PL Results from http://www.premierleague.com/en-gb/matchday/results.html?paramComp_100=true&view=.dateSeason
-and writes the outcome in two different formats.
+
+- Extracts PL Results from http://www.premierleague.com/en-gb/matchday/results.html?paramComp_100=true&view=.dateSeason
+
+- Saves the output in the following formats:
 results_scores: Home, Away, Home_score, Away_score, Week
 results_points: Week, Team1, Team2 (h/a), Points 
 
-Write2file.R 
+/Codes/Write2file.R 
 ------------------
-Writes into output files. 
+
+Supporting function. Takes care of writing into CSV files in my desired format, i.e.:
 file_name formats = name+date+time
 
-/Data 
+/Codes/Team_Abbreviations.csv 
 ------------------
-Output files
+
+3-letters abbreviations for PL team names.
+
+/Sample_Outputs
+------------------
+
+Sample outputs!
