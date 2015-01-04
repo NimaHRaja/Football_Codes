@@ -116,12 +116,12 @@ x <- x[order(-abs(x$delta_tot_inf)),]
 
 event_time <- c('2014-12-06 14:45:26', '2014-09-01 23:49:13', 
                 '2014-11-29 23:59:09', '2015-01-02 09:30:00', 
-                '2014-11-08 14:54:58',
+                # merged with the last one '2014-11-08 14:54:58',
                 '2014-10-06 12:04:46', '2014-11-09 09:35:52')
 
-event_res <- c('NEW 2-1 CHE', 'LEI 1-1 ARS TOT 0-3 LIV MCI 0-1 STO', 
-               'SUN 0-0 CHE', 'TOT 5-3 CHE', 'LIV 1-2 CHE', 'CHE 2-0 ARS',
-               'QPR 2-2 MCI')
+event_res <- c('NEW 2-1 CHE', 'LEI 1-1 ARS \nTOT 0-3 LIV \nMCI 0-1 STO', 
+               'SUN 0-0 CHE', 'TOT 5-3 CHE', 'CHE 2-0 ARS',
+               'LIV 1-2 CHE \nQPR 2-2 MCI')
 
 event <- data.frame(Time = event_time, result = event_res)
 
@@ -131,11 +131,44 @@ event$Time <- strptime(event$Time, "%Y-%m-%d %H:%M:%S")
 event <- event[order(event$Time),]
 
 
+lab_arr <- subset(inf_time, Time %in% event$Time)
+
+lab_arr$x    <- lab_arr$Time 
+lab_arr$y    <- exp(lab_arr$inf) + 0.8
+lab_arr$xend <- lab_arr$Time
+lab_arr$yend <- exp(lab_arr$inf) 
+lab_arr$inf  <- log(exp(lab_arr$inf)+1)
+lab_arr$Time <- lab_arr$Time -800000
+
+lab_arr$y[1] <- lab_arr$y[1] - 0.8
+lab_arr$inf[1] <- log(exp(lab_arr$inf[1])-0.8)
+lab_arr$x[1] <- lab_arr$x[1] - 2000000
+lab_arr$Time[1] <- lab_arr$Time[1] - 2500000
+
+lab_arr$y[2] <- lab_arr$y[2] - 0.8
+lab_arr$inf[2] <- log(exp(lab_arr$inf[2])-0.8)
+lab_arr$x[2] <- lab_arr$x[2] - 2000000
+lab_arr$Time[2] <- lab_arr$Time[2] - 2500000
+
+lab_arr$y[3] <- lab_arr$y[3] - 0.8
+lab_arr$inf[3] <- log(exp(lab_arr$inf[3])-0.8)
+lab_arr$x[3] <- lab_arr$x[3] - 2000000
+lab_arr$Time[3] <- lab_arr$Time[3] - 2500000
+
+#lab_arr$Time[1] <- lab_arr$Time[1] + 1000000
+#lab_arr$inf[1]  <- log(exp(lab_arr$inf)-1)
+
+library(grid)
+
 plot_tc <- ggplot(inf_time, aes(x=Time, y=exp(inf))) + 
     geom_line() + 
     xlab("Time") + 
     ylab("# Title Contenders")  + 
-    geom_text(data=subset(inf_time, Time %in% event$Time), 
-          label=event$res , vjust=1)
+    geom_text(data=lab_arr, 
+          label=event$res , vjust=1) + 
+    geom_segment(data=lab_arr, 
+                 mapping=aes(x= x, y=y, xend=xend, yend=yend), 
+                 arrow=arrow(), size=0.5, color="blue") 
 
 plot_tc
+
