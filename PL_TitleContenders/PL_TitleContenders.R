@@ -160,6 +160,8 @@ lab_arr$Time[3] <- lab_arr$Time[3] - 2500000
 
 library(grid)
 
+#png("Number_of_TitleContenders.png")
+
 plot_tc <- ggplot(inf_time, aes(x=Time, y=exp(inf))) + 
     geom_line() + 
     xlab("Time") + 
@@ -168,7 +170,11 @@ plot_tc <- ggplot(inf_time, aes(x=Time, y=exp(inf))) +
           label=event$res , vjust=1) + 
     geom_segment(data=lab_arr, 
                  mapping=aes(x= x, y=y, xend=xend, yend=yend), 
-                 arrow=arrow(), size=0.5, color="blue") 
+                 arrow=arrow(), size=0.5, color="blue") +
+#     annotate("text", x = lab_arr$Time[1] + 10000000, y = 5, 
+#              label = "Using Betfair Odds as 1/(implied) Probability,\ncalculated Shannon Entropy, and\n tagged major events")
 
 plot_tc
 
+
+#dev.off()
