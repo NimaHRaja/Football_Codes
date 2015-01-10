@@ -2,7 +2,7 @@
 title: "How Many Title Contenders? (draft)"
 author: "NHR"
 date: "Sunday, January 04, 2015"
-output: pdf_document
+output: html_document
 ---
 
 # Introduction and The Model
@@ -13,7 +13,7 @@ I use a c# code for downloading the data and storing them in a SQL database. The
 
 ```{r read_data}
 # Read Data
-odds_all <- read.table("PL_Odds_History.csv", header = FALSE, 
+odds_all <- read.table("./data/PL_Odds_History.csv", header = FALSE, 
                        sep = "\t", stringsAsFactor = FALSE);
 colnames(odds_all) <- c("Market", "Team", "Back", "Lay", "Time_char");
 odds_all$Time <- strptime(odds_all$Time_char, "%Y-%m-%d %H:%M:%S.000")

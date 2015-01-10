@@ -1,7 +1,7 @@
 Files
 ==================
 
-PL_Betfair_ComingFixtures_Odds.R
+PL_Betfair_ComingFixtures_Odds.RMD
 ------------------
 
 - Extracts coming fixtures odds from 

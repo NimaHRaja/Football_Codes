@@ -1,6 +1,6 @@
 # Read Data
 
-odds_all <- read.table("PL_Odds_History.csv", header = FALSE, 
+odds_all <- read.table("./data/PL_Odds_History.csv", header = FALSE, 
                        sep = "\t", stringsAsFactor = FALSE)
 colnames(odds_all) <- c("Market", "Team", "Back", "Lay", "Time")
 
@@ -170,7 +170,7 @@ plot_tc <- ggplot(inf_time, aes(x=Time, y=exp(inf))) +
           label=event$res , vjust=1) + 
     geom_segment(data=lab_arr, 
                  mapping=aes(x= x, y=y, xend=xend, yend=yend), 
-                 arrow=arrow(), size=0.5, color="blue") +
+                 arrow=arrow(), size=0.5, color="blue") #+
 #     annotate("text", x = lab_arr$Time[1] + 10000000, y = 5, 
 #              label = "Using Betfair Odds as 1/(implied) Probability,\ncalculated Shannon Entropy, and\n tagged major events")
 
