@@ -93,10 +93,10 @@ head(delta_tot_inf_major)
 
 x <- 
     merge(
-        dcast(delta_inf_major[1:100,], Time ~ variable , value.var = "value"), 
+        dcast(delta_inf_major[1:50,], Time ~ variable , value.var = "value"), 
         
         
-        dcast(delta_tot_inf_major[1:7,], Time ~ variable , value.var = "value")
+        dcast(delta_tot_inf_major[1:15,], Time ~ variable , value.var = "value")
         , by = "Time")
 
 
@@ -117,11 +117,12 @@ x <- x[order(-abs(x$delta_tot_inf)),]
 event_time <- c('2014-12-06 14:45:26', '2014-09-01 23:49:13', 
                 '2014-11-29 23:59:09', '2015-01-02 09:30:00', 
                 # merged with the last one '2014-11-08 14:54:58',
-                '2014-10-06 12:04:46', '2014-11-09 09:35:52')
+                '2014-10-06 12:04:46', '2014-11-09 09:35:52',
+                '2015-01-11 22:19:57')
 
 event_res <- c('NEW 2-1 CHE', 'LEI 1-1 ARS \nTOT 0-3 LIV \nMCI 0-1 STO', 
                'SUN 0-0 CHE', 'TOT 5-3 CHE', 'CHE 2-0 ARS',
-               'LIV 1-2 CHE \nQPR 2-2 MCI')
+               'LIV 1-2 CHE \nQPR 2-2 MCI', 'EVE 1-1 MCI \nMUN 0-1 SOU')
 
 event <- data.frame(Time = event_time, result = event_res)
 
@@ -154,6 +155,12 @@ lab_arr$y[3] <- lab_arr$y[3] - 0.8
 lab_arr$inf[3] <- log(exp(lab_arr$inf[3])-0.8)
 lab_arr$x[3] <- lab_arr$x[3] - 2000000
 lab_arr$Time[3] <- lab_arr$Time[3] - 2500000
+
+lab_arr$y[7] <- lab_arr$y[7] - 1.3
+lab_arr$inf[7] <- log(exp(lab_arr$inf[7])-1.3)
+
+
+
 
 #lab_arr$Time[1] <- lab_arr$Time[1] + 1000000
 #lab_arr$inf[1]  <- log(exp(lab_arr$inf)-1)
