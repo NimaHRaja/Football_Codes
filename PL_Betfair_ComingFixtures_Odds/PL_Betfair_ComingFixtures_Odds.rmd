@@ -81,8 +81,9 @@ A <-
     round((100/all_matches[,5]+ 100/all_matches[,8])/rowSums(1/all_matches[,3:8])
           , digits = 0)
 
-prob_output <- data.frame(cbind(
-    "Home" = all_matches[,1], H, D, A, "Away" = all_matches[,2]))
+prob_output <- data.frame(
+    "Home" = all_matches[,1], H, D, A, "Away" = all_matches[,2])
+
 
 odds_output <- data.frame(cbind(
     "Home" = all_matches[,1], 
@@ -92,6 +93,10 @@ odds_output <- data.frame(cbind(
     "Away" = all_matches[,2])
     )
 
+odds_output <- odds_output[1:10, ]
+
+prob_output <- prob_output[1:10, ]
+
 prob_output <- 
     prob_output[order(apply(prob_output[,2:4],1, max)),]
 ```
@@ -99,14 +104,14 @@ prob_output <-
 \newpage
 
 ```{r HTML_output, echo = FALSE}
-kable(prob_output, format = "markdown")
-kable(odds_output, format = "markdown")
+ kable(prob_output, format = "markdown")
+ kable(odds_output, format = "markdown")
 ```
 
 ```{r PDF_output, results = 'asis', echo = FALSE }
-# print(xtable(prob_output, caption = "Coming Fixtures Odds")
-#     , comment=F)
+# print(xtable(prob_output, caption = "Coming Fixtures (Implied) Probabilities"
+#     , digits = c(0,0,0,0,0,0)), include.rownames = FALSE, comment=F) 
 # print(
-#     xtable(odds_output, caption = "Coming Fixtures (Implied) Probabilities")
+#     xtable(odds_output, caption = "Coming Fixtures Odds" )
 #     , comment=F) 
 ```
