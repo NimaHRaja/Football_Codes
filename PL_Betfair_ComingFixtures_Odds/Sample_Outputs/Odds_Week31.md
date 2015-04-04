@@ -1,14 +1,9 @@
----
-title: "PL Fixtures - (Betfair) Odds & (Implied) Probabilities"
-output:
-  html_document:
-    keep_md: yes
-  pdf_document: default
----
+# PL Fixtures - (Betfair) Odds & (Implied) Probabilities
 
 ## Skip to pages 3 and 4 to see the results.
 
-```{r libraries, results = 'hide', warning = FALSE}
+
+```r
 library(XML);
 library(xtable);
 library(knitr);
@@ -16,7 +11,8 @@ library(knitr);
 
 Reading Data from <http://www.betfair.com/exchange/football/competition?id=31>
 
-```{r get_data, results = 'hide'}
+
+```r
 matches_URL <- "https://www.betfair.com/exchange/football/competition?id=31"
 
 # For some reason, Betfair has changed its design recently. 
@@ -35,7 +31,8 @@ matches_parse <- htmlTreeParse(matches_html,useInternal=TRUE)
 
 Cleaning Data:
 
-```{r clean_data, results = 'hide'}
+
+```r
 # Extract the relevant bits.
 data_odds_back <- xpathSApply(matches_parse, 
                               "//button[@class = 'bet-button back cta cta-back i13n-ltxt-FltBetSlpB i13n-Sp-1']/span[@class = 'price']"
@@ -72,7 +69,8 @@ colnames(all_matches) <-
 
 Creating probabilities data.frame (a rough estimate + normalisation). The results are reported with 0 decimal points.
 
-```{r output_DF, results = 'hide'}
+
+```r
 # Output data.frames
 
 H <- 
@@ -107,15 +105,33 @@ prob_output <-
 
 \newpage
 
-```{r HTML_output, echo = FALSE}
- kable(prob_output, format = "markdown")
- kable(odds_output, format = "markdown")
-```
 
-```{r PDF_output, results = 'asis', echo = FALSE }
-# print(xtable(prob_output, caption = "Coming Fixtures (Implied) Probabilities"
-#     , digits = c(0,0,0,0,0,0)), include.rownames = FALSE, comment=F) 
-# print(
-#     xtable(odds_output, caption = "Coming Fixtures Odds" )
-#     , comment=F) 
-```
+|   |Home       |  H|  D|  A|Away        |
+|:--|:----------|--:|--:|--:|:-----------|
+|2  |Everton    | 35| 30| 35|Southampton |
+|9  |Sunderland | 38| 31| 31|Newcastle   |
+|3  |Leicester  | 45| 27| 28|West Ham    |
+|8  |Burnley    | 28| 27| 45|Tottenham   |
+|5  |Swansea    | 51| 29| 21|Hull        |
+|1  |Arsenal    | 53| 26| 21|Liverpool   |
+|6  |West Brom  | 56| 27| 18|QPR         |
+|10 |C Palace   | 18| 24| 59|Man City    |
+|4  |Man Utd    | 74| 17|  8|Aston Villa |
+|7  |Chelsea    | 77| 16|  7|Stoke       |
+
+
+
+|Home       |H         |D        |A         |Away        |
+|:----------|:---------|:--------|:---------|:-----------|
+|Arsenal    |1.88/1.9  |3.85/3.9 |4.7/4.8   |Liverpool   |
+|Everton    |2.82/2.84 |3.3/3.35 |2.86/2.9  |Southampton |
+|Leicester  |2.22/2.24 |3.65/3.7 |3.6/3.65  |West Ham    |
+|Man Utd    |1.34/1.35 |5.7/5.8  |12/12.5   |Aston Villa |
+|Swansea    |1.97/1.98 |3.45/3.5 |4.8/4.9   |Hull        |
+|West Brom  |1.8/1.81  |3.7/3.8  |5.6/5.7   |QPR         |
+|Chelsea    |1.29/1.3  |6.2/6.4  |14.5/15   |Stoke       |
+|Burnley    |3.55/3.6  |3.65/3.7 |2.24/2.26 |Tottenham   |
+|Sunderland |2.62/2.64 |3.25/3.3 |3.2/3.25  |Newcastle   |
+|C Palace   |5.6/5.8   |4.2/4.3  |1.7/1.71  |Man City    |
+
+
