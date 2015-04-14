@@ -10,3 +10,5 @@ Folders:
 - Download_PremierLeague_Results: Gets PL Results.
 
 - PL_TitleContenders: Calculates the (effective) number of team with a shot at the title vs. time.
+
+- Download_PremierLeague_Fixtures: Gets PL Fixtures.
